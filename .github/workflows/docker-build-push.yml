@@ -2,7 +2,9 @@
 name: Image Scanner
 
 on: 
-    workflow_call:
+    workflow_dispatch:
+      # This workflow can be triggered manually from the GitHub Actions tab in the repository.
+      # This allows us to run the image scan on demand, such as after a new image is pushed to Docker Hub or before a release.
 
 jobs:
     image-scanner:
