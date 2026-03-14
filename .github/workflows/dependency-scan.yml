@@ -1,8 +1,7 @@
 name: Dependency Scan
 
 on:
-    push:
-      branches: [main]
+    workflow_call:
 
 jobs:
   dependency-scan:
