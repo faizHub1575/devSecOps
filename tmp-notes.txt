@@ -1,0 +1,37 @@
+DevSecOps Code Quality Tools – Short Note
+
+CI/CD pipelines (e.g., GitHub Actions) use different tools for linting (code quality) and SAST (security scanning) depending on the programming language.
+
+Python:
+Tools: Flake8 (linting), Bandit (security scan), pytest (testing)
+Commands:
+pip install -r requirements.txt
+flake8 .
+bandit -r .
+pytest
+
+Java:
+Tools: Checkstyle (linting), SpotBugs (security scan), Maven (build & test)
+Commands:
+mvn clean install
+mvn checkstyle:check
+mvn spotbugs:check
+
+Node.js / JavaScript:
+Tools: ESLint (linting), npm audit (security scan), Jest (testing)
+Commands:
+npm install
+npx eslint .
+npm audit
+npm test
+
+Key Idea:
+Every language in a CI/CD pipeline uses tools for:
+
+* Linting → check code quality and standards
+* Security scanning (SAST) → detect vulnerabilities
+* Testing → verify application functionality
+
+These commands run automatically in the pipeline before build or deployment.
+....................
+
