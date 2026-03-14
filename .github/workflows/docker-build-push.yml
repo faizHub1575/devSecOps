@@ -1,7 +1,7 @@
 name: Docker Build & Push
 
 on: 
-    workflow_call:
+    workflow_dispatch:
       # This workflow can be called by other workflows using the workflow_call event.
       # This allows us to reuse this workflow in multiple places, such as in a pull request workflow or a release workflow.
 
