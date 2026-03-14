@@ -137,3 +137,5 @@ push to main
 ├── test_app.py                 # pytest route tests
 └── CNAME                       # Custom domain for GitHub Pages
 ```
+#   d e v S e c O p s  
+ 
