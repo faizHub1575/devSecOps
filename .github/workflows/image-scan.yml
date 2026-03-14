@@ -1,10 +1,9 @@
+
 # uses Trivy image scanner for CVEs - Docker Image
 name: Image Scanner
 
 on: 
     workflow_dispatch:
-      # This workflow can be triggered manually from the GitHub Actions tab in the repository.
-      # This allows us to run the image scan on demand, such as after a new image is pushed to Docker Hub or before a release.
 
 jobs:
     image-scanner:
@@ -23,6 +22,7 @@ jobs:
             - name: Trivy Scanner
               uses: aquasecurity/trivy-action@0.35.0
               with:
-                image-ref: ${{ vars.DOCKERHUB_USER }}/github-actions-app:latest 
+                image-ref: ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.sha}}
                 severity: 'CRITICAL,HIGH'
                 exit-code: '1'
+                #trivyignore: ${{ github.workspace }}/.trivyignore
