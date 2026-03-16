@@ -14,9 +14,9 @@ jobs:
       - name: create folder
         uses: appleboy/ssh-action@v1.0.3 # Use SSH action for executing commands
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.EC2.SSH_HOST }}
+          username: ${{ secrets.EC2.SSH_USERNAME }}
+          key: ${{ secrets.EC2.SSH_PRIVATE_KEY }}
           script: |
             echo "Creating directory if it doesn't exist..."
             sudo apt-get update && sudo apt-get install -y docker.io docker-compose
@@ -26,9 +26,9 @@ jobs:
       - name: Copy files via scp
         uses: appleboy/scp-action@v0.1.3 # Use the latest stable version
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          host: ${{ secrets.EC2.SSH_HOST }}
+          username: ${{ secrets.EC2.SSH_USERNAME }}
+          key: ${{ secrets.EC2.SSH_PRIVATE_KEY }}
           source: docker-compose.yml # Local files/directories to transfer
           target: ~/devops
 
@@ -44,7 +44,7 @@ jobs:
             docker pull faiz1575/github-actions-app:latest
             docker stop app || true
             docker rm app || true
-            docker run -d -p 80:80 --name app faiz1575/github-actions-app:latest
+            docker run -d -p 80:80 --name app ${{ vars.DOCKERHUB_USER }}/github-actions-app:${{ github.sha}}
             # Enter the commands you want to run on your EC2 instance
             cd /var/www/your-app
             git pull origin main
