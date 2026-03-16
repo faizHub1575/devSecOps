@@ -3,7 +3,7 @@ name: DevsecOps Pipeline
 on:
   workflow_dispatch:
 
-jobs:
+jobs: 
     code-quality:
         uses: ./.github/workflows/code-quality.yml
     
