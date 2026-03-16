@@ -17,11 +17,11 @@ jobs:
         uses: ./.github/workflows/docker-build-push.yml
 
     image-scan:
-        needs: docker-build-push
+        needs: [code-quality, secret-scan, dependency-scan, docker-build-push]
         uses: ./.github/workflows/image-scan.yml
 
     deploy-to-server:
-        needs: [code-quality, secret-scan, dependency-scan, docker-build-push, image-scan]
+        needs: [image-scan]
         uses: ./.github/workflows/deploy-to-server.yml
     
     
