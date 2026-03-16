@@ -3,7 +3,7 @@
 name: Image Scanner
 
 on: 
-    workflow_calls:
+    workflow_call:
 
 jobs:
     image-scanner:

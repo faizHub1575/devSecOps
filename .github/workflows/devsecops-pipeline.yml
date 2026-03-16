@@ -13,6 +13,9 @@ jobs:
     dependency-scan:
         uses: ./.github/workflows/dependency-scan.yml
 
+    docker-build-push:
+        uses: ./.github/workflows/docker-build-push.yml
+
     image-scan:
         uses: ./.github/workflows/image-scan.yml
 
