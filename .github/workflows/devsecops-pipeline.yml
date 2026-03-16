@@ -29,6 +29,7 @@ jobs:
     deploy-to-server:
         needs: [trivy]
         uses: ./.github/workflows/deploy-to-server.yml
+        secrets: inherit
     
     
 
