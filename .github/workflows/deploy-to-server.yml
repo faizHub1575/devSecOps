@@ -40,6 +40,11 @@ jobs:
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           port: 22
           script: |
+          
+            docker pull faiz1575/github-actions-app:latest
+            docker stop app || true
+            docker rm app || true
+            docker run -d -p 80:80 --name app faiz1575/github-actions-app:latest
             # Enter the commands you want to run on your EC2 instance
             cd /var/www/your-app
             git pull origin main
