@@ -1,0 +1,26 @@
+name: Deploy to EC2 with appleboy/ssh-action
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3 # Use the latest version
+        with:
+          host: ${{ secrets.EC2_SSH_HOST }}
+          username: ${{ secrets.EC2_SSH_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            # Enter the commands you want to run on your EC2 instance
+            cd /var/www/your-app
+            git pull origin main
+            # Example: restart a service or run a build command
+            # sudo systemctl restart your-service
+            echo "Deployment completed successfully!"
