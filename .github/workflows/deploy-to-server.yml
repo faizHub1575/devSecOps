@@ -1,9 +1,8 @@
 name: Deploy to EC2 with appleboy/ssh-action
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    
 jobs:
   deploy:
     runs-on: ubuntu-latest
