@@ -13,15 +13,21 @@ jobs:
     dependency-scan:
         uses: ./.github/workflows/dependency-scan.yml
 
-    docker-build-push:
-        uses: ./.github/workflows/docker-build-push.yml
+    docker-scan:
+        uses: ./.github/workflows/docker-lint.yml
 
-    image-scan:
-        needs: [code-quality, secret-scan, dependency-scan, docker-build-push]
+     build:
+        needs: [code-quality, secrets-scan, dependency-scan, docker-scan]
+        uses: ./.github/workflows/docker-build-push.yml
+        secrets: inherit
+
+    trivy:
+        needs: [build]
         uses: ./.github/workflows/image-scan.yml
+        secrets: inherit
 
     deploy-to-server:
-        needs: [image-scan]
+        needs: [trivy]
         uses: ./.github/workflows/deploy-to-server.yml
     
     
